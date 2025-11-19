@@ -96,6 +96,13 @@ ComfyUI/models/Sa2VA/
 # 使用huggingface-cli
 huggingface-cli download ByteDance/Sa2VA-Qwen3-VL-4B --local-dir ComfyUI/models/Sa2VA/Sa2VA-Qwen3-VL-4B
 ```
+### 📞 联系方式 📞
+- 作者：@炮老师的小课堂
+- 版本：v1.0.1
+- 更新日期：2025年
+- 作者微信：paolaoshiAICG
+
+![alt text](image-1.png)
 
 **炮老师的小课堂** 出品 🎓
 # ComfyUI-Sa2VA-DP
