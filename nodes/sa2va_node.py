@@ -297,7 +297,16 @@ class Sa2VANode:
                 print(f"❌ 模型下载失败: {model_path}")
                 return False
             
-            print(f"📁 模型路径: {model_path}")
+            # 显示相对路径，避免暴露完整路径
+            try:
+                from pathlib import Path
+                model_path_obj = Path(model_path)
+                comfyui_root = self.model_manager.comfyui_path
+                rel_path = model_path_obj.relative_to(comfyui_root)
+                print(f"📁 模型路径: ComfyUI/{rel_path}")
+            except (ValueError, AttributeError):
+                # 如果无法获取相对路径，只显示模型名称
+                print(f"📁 模型路径: {Path(model_path).name}")
             
             # 导入transformers
             from transformers import AutoProcessor, AutoModel

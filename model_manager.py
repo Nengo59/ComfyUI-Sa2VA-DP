@@ -7,24 +7,82 @@ from pathlib import Path
 from typing import Optional, Tuple
 
 
+def find_comfyui_root() -> Path:
+    """
+    自动查找ComfyUI根目录
+    从当前文件向上查找，直到找到包含'models'文件夹的目录
+    
+    Returns:
+        ComfyUI根目录的Path对象
+    
+    Raises:
+        RuntimeError: 如果找不到ComfyUI根目录
+    """
+    # 从当前文件开始向上查找
+    current = Path(__file__).resolve().parent
+    
+    # 最多向上查找5层
+    for _ in range(5):
+        # 检查是否存在models目录（ComfyUI的标志性目录）
+        if (current / "models").exists() and (current / "models").is_dir():
+            return current
+        
+        # 向上一层
+        parent = current.parent
+        if parent == current:  # 已经到达根目录
+            break
+        current = parent
+    
+    # 如果找不到，抛出错误
+    raise RuntimeError(
+        "无法自动找到ComfyUI根目录！\n"
+        "请确保此节点安装在 ComfyUI/custom_nodes/ 目录下。\n"
+        "当前文件位置: " + str(Path(__file__).resolve())
+    )
+
+
 class Sa2VAModelManager:
     """Sa2VA模型管理器 - 处理模型下载和缓存"""
     
-    def __init__(self, comfyui_path: str = "E:/Comfyui_test/ComfyUI"):
+    def __init__(self, comfyui_path: Optional[str] = None):
         """
         初始化模型管理器
         
         Args:
-            comfyui_path: ComfyUI的根目录路径
+            comfyui_path: ComfyUI的根目录路径（可选，默认自动检测）
         """
-        self.comfyui_path = Path(comfyui_path)
+        # 如果没有指定路径，自动检测
+        if comfyui_path is None:
+            try:
+                self.comfyui_path = find_comfyui_root()
+                print(f"✅ 自动检测到ComfyUI根目录")
+            except RuntimeError as e:
+                print(f"❌ {e}")
+                raise
+        else:
+            self.comfyui_path = Path(comfyui_path)
+        
         # 模型存储目录：ComfyUI/models/Sa2VA
         self.models_dir = self.comfyui_path / "models" / "Sa2VA"
         
         # 确保模型目录存在
-        self.models_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            self.models_dir.mkdir(parents=True, exist_ok=True)
+        except Exception as e:
+            raise RuntimeError(
+                f"无法创建模型目录: {self.models_dir}\n"
+                f"错误信息: {e}\n"
+                f"请检查是否有写入权限。"
+            )
         
-        print(f"📁 Sa2VA模型目录: {self.models_dir}")
+        # 显示相对路径，更友好
+        try:
+            # 尝试获取相对于ComfyUI根目录的路径
+            rel_path = self.models_dir.relative_to(self.comfyui_path)
+            print(f"📁 Sa2VA模型目录: ComfyUI/{rel_path}")
+        except ValueError:
+            # 如果无法获取相对路径，显示绝对路径
+            print(f"📁 Sa2VA模型目录: {self.models_dir}")
     
     def get_model_path(self, model_name: str) -> Path:
         """
@@ -106,11 +164,21 @@ class Sa2VAModelManager:
             
             # 如果模型已存在且不强制下载，直接返回
             if not force_download and self.is_model_downloaded(model_name):
-                print(f"✅ 模型已存在，跳过下载: {model_path}")
+                # 显示相对路径
+                try:
+                    rel_path = model_path.relative_to(self.comfyui_path)
+                    print(f"✅ 模型已存在，跳过下载: ComfyUI/{rel_path}")
+                except ValueError:
+                    print(f"✅ 模型已存在，跳过下载: {model_path.name}")
                 return True, str(model_path)
             
             print(f"🔄 开始下载模型: {model_name}")
-            print(f"📥 下载目标目录: {model_path}")
+            # 显示相对路径
+            try:
+                rel_path = model_path.relative_to(self.comfyui_path)
+                print(f"📥 下载目标目录: ComfyUI/{rel_path}")
+            except ValueError:
+                print(f"📥 下载目标目录: {model_path.name}")
             
             # 使用huggingface_hub下载模型
             from huggingface_hub import snapshot_download
@@ -214,12 +282,12 @@ class Sa2VAModelManager:
 _global_model_manager = None
 
 
-def get_model_manager(comfyui_path: str = "E:/Comfyui_test/ComfyUI") -> Sa2VAModelManager:
+def get_model_manager(comfyui_path: Optional[str] = None) -> Sa2VAModelManager:
     """
-    获取全局模型管理器实例
+    获取全局模型管理器实例（单例模式）
     
     Args:
-        comfyui_path: ComfyUI根目录路径
+        comfyui_path: ComfyUI根目录路径（可选，默认自动检测）
     
     Returns:
         模型管理器实例

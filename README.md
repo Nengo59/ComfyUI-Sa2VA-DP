@@ -96,9 +96,27 @@ ComfyUI/models/Sa2VA/
 # 使用huggingface-cli
 huggingface-cli download ByteDance/Sa2VA-Qwen3-VL-4B --local-dir ComfyUI/models/Sa2VA/Sa2VA-Qwen3-VL-4B
 ```
+## 🔧 最新更新 (v1.0.2)
+
+### 🐛 重要Bug修复
+
+**修复了致命的路径问题**：
+
+1. ✅ **移除硬编码路径** - 不再依赖特定的 `E:/Comfyui_test/ComfyUI` 路径
+2. ✅ **自动检测ComfyUI根目录** - 自动适配任何用户的安装路径
+3. ✅ **支持所有盘符** - 支持C盘、D盘、E盘等任意盘符
+4. ✅ **友好的路径显示** - 使用相对路径显示，不暴露完整路径
+5. ✅ **更好的错误提示** - 提供清晰的错误信息和解决方案
+
+**影响**：
+- 修复前：只能在开发者电脑上运行，其他用户会遇到 `[WinError 3] 系统找不到指定的路径。: 'E:\\'` 错误
+- 修复后：可以在任何用户的ComfyUI安装中正常工作
+
+详细修复说明请查看 [BUG修复说明.md](BUG修复说明.md)
+
 ### 📞 联系方式 📞
 - 作者：@炮老师的小课堂
-- 版本：v1.0.1
+- 版本：v1.0.2
 - 更新日期：2025年
 - 作者微信：paolaoshiAICG
 
